@@ -1,6 +1,6 @@
 import { RocketMoves } from "./RocketMoves.js";
 
-const canvas = document.getElementById("main-screen");
+const canvas = document.getElementById("minha-tela");
 const ctx = canvas.getContext("2d");
 
 RocketMoves.start({ ctx });
