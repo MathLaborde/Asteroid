@@ -27,6 +27,8 @@ function pontos(x) {
 }
 
 // Chamar a função de Colisão Alessandra
+
+
 function gameOver() {
     context.font = "30px Lucida Handwriting";
     context.fillStyle = "Red";
