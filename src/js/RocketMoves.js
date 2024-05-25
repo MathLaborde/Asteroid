@@ -6,6 +6,7 @@ export const RocketMoves = {
   angle: 0,
   turnRate: 2,
   imagem: new Image(),
+  ultimoMove: Date.now(),
   //#endregion
 
   //#region Function Start
@@ -37,6 +38,7 @@ export const RocketMoves = {
         (keysPressed["KeyW"] || keysPressed["ArrowUp"])
       ) {
         speedUpInterval = setInterval((e) => {
+          this.ultimoMove = null;
           this.speed += 0.02;
           if (this.speed > 1.5) {
             this.speed = 1.5;
@@ -52,8 +54,9 @@ export const RocketMoves = {
       ) {
         speedDownInterval = setInterval((e) => {
           this.speed -= 0.02;
-          if (this.speed < 0) {
+          if (this.speed <= 0) {
             this.speed = 0;
+            this.ultimoMove = Date.now();
             clearInterval(speedDownInterval);
             speedDownInterval = null;
           }

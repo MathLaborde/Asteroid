@@ -25,8 +25,11 @@ function GameLoop() {
   moveAsteroides({ ctx });
 
   tempoAtual = new Date().getTime();
-  pontos(Math.floor(intervalo), ctx);
-  ctx.fillText("LEVEL: " + level, 15, canvas.height - 10);
+  intervalo = Math.floor((tempoAtual - tempoInicial) / 1000 )
+  pontos(intervalo, ctx);
+  // ctx.fillText("LEVEL: " + level, 15, canvas.height - 10);
+  inatividade(RocketMoves.ultimoMove, intervalo);
+
   if (frameId.id) {
     frameId.id = requestAnimationFrame(GameLoop);
   }

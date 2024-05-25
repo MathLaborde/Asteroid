@@ -1,7 +1,9 @@
 let asteroidPequenoImage = new Image();
 let asteroidGrandeImage = new Image();
-asteroidPequenoImage.src = "./img/asteroide_pequeno.png";
-asteroidGrandeImage.src = "./img/asteroide_grande.png";
+asteroidPequenoImage.src = "./src/img/asteroide_pequeno.png";
+asteroidGrandeImage.src = "./src/img/asteroide_grande.png";
+let level = 1
+
 
 const canvas = document.getElementById("minha-tela");
 
@@ -59,6 +61,10 @@ setInterval(function () {
 }, 10000);
 // Fim
 
+setInterval(function () {
+  level++;
+}, 30000);
+
 function moveAsteroides({ ctx }) {
   for (let i = 0; i < asteroids.length; i++) {
     let asteroide = asteroids[i];
@@ -85,4 +91,7 @@ function moveAsteroides({ ctx }) {
       asteroide.height
     );
   }
+
+   // Desenha o nivel na tela
+   ctx.fillText("LEVEL: " + level, 20, canvas.height - 10);
 }
