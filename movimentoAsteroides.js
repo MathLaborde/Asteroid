@@ -1,19 +1,32 @@
-// Script de movimento dos asteróides
 var canvas = document.getElementById('minha-tela');
 var context = canvas.getContext('2d');
-var circulos = []; // Array para armazenar os círculos
+var asteroidPequenoImage = new Image();
+var asteroidGrandeImage = new Image();
+asteroidPequenoImage.src = './img/asteroide_pequeno.png'; // Caminho da imagem do asteroide pequeno
+asteroidGrandeImage.src = './img/asteroide_grande.png'; // Caminho da imagem do asteroide grande
+var asteroids = []; // Array para armazenar os asteroides
 var velocidadeX = 2; // Velocidade horizontal
 var velocidadeY = 1; // Velocidade vertical
 
-function criaCirculo() {
+function criaAsteroide(tamanho, escala) {
     var lado = Math.floor(Math.random() * 4); // Escolhe uma lateral aleatória (0-3)
-    var x, y;
+    var x, y, image, width, height;
+
+    if (escala === 'grande') {
+        width = 40; // Tamanho do asteroide grande
+        height = 40; // Tamanho do asteroide grande
+        image = asteroidGrandeImage;
+    } else {
+        width = 20; // Tamanho do asteroide pequeno
+        height = 20; // Tamanho do asteroide pequeno
+        image = asteroidPequenoImage;
+    }
 
     // Define as coordenadas iniciais com base na lateral escolhida
     switch (lado) {
         case 0: // Topo
             x = Math.random() * canvas.width;
-            y = -15; // Raio do círculo
+            y = -15 - height; // Ajuste para que os asteroides não apareçam de repente na tela
             break;
         case 1: // Direita
             x = canvas.width + 15; // Largura do círculo
@@ -24,58 +37,64 @@ function criaCirculo() {
             y = canvas.height + 15; // Altura do círculo
             break;
         case 3: // Esquerda
-            x = -15; // Raio do círculo
+            x = -15 - width; // Ajuste para que os asteroides não apareçam de repente na tela
             y = Math.random() * canvas.height;
             break;
     }
 
-    // Adiciona o círculo ao array
-    circulos.push({ x: x, y: y });
+    // Adiciona o asteroide ao array
+    asteroids.push({ x: x, y: y, width: width, height: height, image: image });
 }
 
-// Chama a função para criar um novo círculo após 2 segundos
-setTimeout(criaCirculo, 2000);
+// Chama a função para criar um novo asteroide após 2 segundos
+setTimeout(function() {
+    criaAsteroide(asteroidPequenoImage, 'pequeno');
+}, 2000);
 
-// Chama a função para criar um novo círculo a cada 5 segundos
-setInterval(criaCirculo, 5000);
+// Chama a função para criar um novo asteroide a cada 5 segundos
+setInterval(function() {
+    criaAsteroide(asteroidPequenoImage, 'pequeno');
+}, 5000);
 
-function moveCirculos() {
+// Chama a função para criar um novo asteroide a cada 10 segundos com o asteroide grande
+setInterval(function() {
+    criaAsteroide(asteroidGrandeImage, 'grande');
+}, 10000);
+
+function moveAsteroides() {
     // Limpa a tela
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Move cada círculo 
-    for (var i = 0; i < circulos.length; i++) {
-        var circulo = circulos[i];
+    // Move cada asteroide 
+    for (var i = 0; i < asteroids.length; i++) {
+        var asteroide = asteroids[i];
 
-        // Move o círculo
-        circulo.x += velocidadeX;
-        circulo.y += velocidadeY;
+        // Move o asteroide
+        asteroide.x += velocidadeX;
+        asteroide.y += velocidadeY;
 
-        // Verifica se o círculo atingiu os limites da tela
-        if (circulo.x <= -15) {
+        // Verifica se o asteroide atingiu os limites da tela
+        if (asteroide.x <= -asteroide.width) {
             // Aparece do lado direito
-            circulo.x = canvas.width + 15; // Largura do círculo
-        } else if (circulo.x >= canvas.width + 15) {
+            asteroide.x = canvas.width + 15; // Largura do círculo
+        } else if (asteroide.x >= canvas.width + 15) {
             // Aparece do lado esquerdo
-            circulo.x = -15; // Raio do círculo
+            asteroide.x = -asteroide.width; // Raio do círculo
         }
-        if (circulo.y <= -15) {
+        if (asteroide.y <= -asteroide.height) {
             // Aparece embaixo
-            circulo.y = canvas.height + 15; // Altura do círculo
-        } else if (circulo.y >= canvas.height + 15) {
+            asteroide.y = canvas.height + 15; // Altura do círculo
+        } else if (asteroide.y >= canvas.height + 15) {
             // Aparece em cima
-            circulo.y = -15; // Raio do círculo
+            asteroide.y = -asteroide.height; // Raio do círculo
         }
 
-        // Desenha o círculo na nova posição
-        context.beginPath();
-        context.arc(circulo.x, circulo.y, 15, 0, Math.PI * 2);
-        context.fillStyle = "white"; // Cor branca
-        context.fill();
+        // Desenha o asteroide na nova posição
+        context.drawImage(asteroide.image, asteroide.x, asteroide.y, asteroide.width, asteroide.height);
     }
 
     // Chama recursivamente a função 
-    requestAnimationFrame(moveCirculos);
+    requestAnimationFrame(moveAsteroides);
 }
 
-moveCirculos(); // Inicia
+moveAsteroides(); // Inicia
