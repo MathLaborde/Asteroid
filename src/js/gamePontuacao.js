@@ -6,7 +6,6 @@ context.font = "20px cursive";
 var tempoInicial = new Date().getTime();
 var intervalo = 0,
   tempoAtual;
-// requestAnimationFrame(gameloop);
 
 function gameloop() {
   tempoAtual = new Date().getTime();
@@ -22,7 +21,6 @@ function gameloop() {
 }
 
 function pontos(x) {
-  //   context.clearRect(0, 0, canvas.width, canvas.height);
   context.fillText("PONTOS: " + x, canvas.width - 125, canvas.height - 10);
 }
 
