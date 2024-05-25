@@ -6,12 +6,36 @@ let frameId = {
   id: 1,
 };
 
-var tempoInicial = new Date().getTime();
-var intervalo = 0,
-  tempoAtual;
+const Pontos = {
+  intervalo: function () {
+    setInterval((e) => {
+      this.placar++;
+    }, 1000);
+  },
+  placar: 0,
+  penalidade: true,
+  timePenalidade: function () {
+    let time;
+    time = setInterval((e) => {
+      this.penalidade = true;
+      clearInterval(time);
+    }, 10000);
+  },
+  aplicaPenalidade: function () {
+    if (this.penalidade) {
+      this.penalidade = false;
+      this.timePenalidade();
+      this.placar = this.placar - 10 <= 0 ? 0 : this.placar - 10;
+    }
+  },
+};
+
+Pontos.intervalo();
+
 ctx.font = "20px cursive";
 
 RocketMoves.start({ ctx });
+
 if (frameId.id) {
   frameId.id = requestAnimationFrame(GameLoop);
 }
@@ -20,15 +44,14 @@ function GameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   RocketMoves.update();
+
+  if (RocketMoves.inativo) Pontos.aplicaPenalidade();
+
   detectarColisao(RocketMoves, asteroids, ctx, frameId);
 
   moveAsteroides({ ctx });
 
-  tempoAtual = new Date().getTime();
-  intervalo = Math.floor((tempoAtual - tempoInicial) / 1000 )
-  pontos(intervalo, ctx);
-  // ctx.fillText("LEVEL: " + level, 15, canvas.height - 10);
-  inatividade(RocketMoves.ultimoMove, intervalo);
+  mostraPontos(Pontos.placar, ctx);
 
   if (frameId.id) {
     frameId.id = requestAnimationFrame(GameLoop);

@@ -6,7 +6,8 @@ export const RocketMoves = {
   angle: 0,
   turnRate: 2,
   imagem: new Image(),
-  ultimoMove: Date.now(),
+  inativo: true,
+  timerTimeout: null,
   //#endregion
 
   //#region Function Start
@@ -38,7 +39,10 @@ export const RocketMoves = {
         (keysPressed["KeyW"] || keysPressed["ArrowUp"])
       ) {
         speedUpInterval = setInterval((e) => {
-          this.ultimoMove = null;
+          clearTimeout(this.timerTimeout);
+
+          this.inativo = false;
+
           this.speed += 0.02;
           if (this.speed > 1.5) {
             this.speed = 1.5;
@@ -56,7 +60,11 @@ export const RocketMoves = {
           this.speed -= 0.02;
           if (this.speed <= 0) {
             this.speed = 0;
-            this.ultimoMove = Date.now();
+
+            this.timerTimeout = setTimeout(() => {
+              this.inativo = true;
+            }, 3000);
+
             clearInterval(speedDownInterval);
             speedDownInterval = null;
           }
@@ -128,14 +136,14 @@ export const RocketMoves = {
 
     //#region Hitbox Foguete
 
-    // this.ctx.strokeStyle = "red";
-    // this.ctx.lineWidth = 2;
-    // this.ctx.strokeRect(
-    //   -this.size.width / 2,
-    //   -this.size.height / 2,
-    //   this.size.width,
-    //   this.size.height
-    // );
+    this.ctx.strokeStyle = "red";
+    this.ctx.lineWidth = 2;
+    this.ctx.strokeRect(
+      -this.size.width / 2,
+      -this.size.height / 2,
+      this.size.width,
+      this.size.height
+    );
 
     //#region
 
