@@ -122,6 +122,20 @@ export const RocketMoves = {
       this.size.width,
       this.size.height
     );
+
+    //#region Hitbox Foguete
+
+    // this.ctx.strokeStyle = "red";
+    // this.ctx.lineWidth = 2;
+    // this.ctx.strokeRect(
+    //   -this.size.width / 2,
+    //   -this.size.height / 2,
+    //   this.size.width,
+    //   this.size.height
+    // );
+
+    //#region
+
     this.ctx.restore();
 
     if (this.position.x < 0) {

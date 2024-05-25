@@ -10,5 +10,7 @@ function GameLoop() {
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
   RocketMoves.update();
 
+  detectarColisao(RocketMoves, circulos);
+
   requestAnimationFrame(GameLoop);
 }
