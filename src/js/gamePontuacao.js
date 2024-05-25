@@ -1,36 +1,15 @@
-var canvas = document.getElementById("minha-tela");
-var context = canvas.getContext("2d");
-context.font = "20px cursive";
-
-//obtendo o valor do momento em que o jogo é iniciado
-var tempoInicial = new Date().getTime();
-var intervalo = 0,
-  tempoAtual;
-
-function gameloop() {
-  tempoAtual = new Date().getTime();
-  // intervalo += Math.floor((tempoAtual - tempoInicial) / 1000);
-  // intervalo += 0.018;
-  pontos(Math.floor(intervalo));
-  // if (intervalo < 40) requestAnimationFrame(gameloop);
-  // else {
-  //   gameOver();
-  // }
-
-  context.fillText("LEVEL: " + level, 15, canvas.height - 10);
-}
-
-function pontos(x) {
-  context.fillText("PONTOS: " + x, canvas.width - 125, canvas.height - 10);
+function pontos(x, ctx) {
+  ctx.fillText("PONTOS: " + x, ctx.canvas.width - 125, ctx.canvas.height - 10);
 }
 
 // Chamar a função de Colisão Alessandra
 
-function gameOver() {
-  context.font = "30px Lucida Handwriting";
-  context.fillStyle = "Red";
-  context.fillText("GAME OVER", canvas.width / 2 - 100, canvas.height / 2);
-  cancelAnimationFrame();
+function gameOver(ctx, frame) {
+  ctx.font = "30px Lucida Handwriting";
+  ctx.fillStyle = "Red";
+  ctx.fillText("GAME OVER", canvas.width / 2 - 100, canvas.height / 2);
+  cancelAnimationFrame(frame.id);
+  frame.id = null;
   return;
 }
 
@@ -43,10 +22,9 @@ function aumentarVelocidadeAsteroide() {
   velocidadeAsteroide += aumentarVelocidade;
   level += 1;
   console.log(velocidadeAsteroide);
-  // context.fillText("LEVEL: " + level, 20, canvas.height - 10)
+  // ctx.fillText("LEVEL: " + level, 20, canvas.height - 10)
 }
 
-// setInterval(aumentarVelocidadeAsteroide, 20000);
 // Fim Lógica de Aumento de Velocidade do Asteroide
 
 // Inicio Lógica Inatividade
@@ -69,9 +47,5 @@ function penalidade() {
     intervalo = 0;
   }
   console.log(intervalo);
-  context.fillText(
-    "PONTOS: " + intervalo,
-    canvas.width - 150,
-    canvas.height - 10
-  );
+  ctx.fillText("PONTOS: " + intervalo, canvas.width - 150, canvas.height - 10);
 }
