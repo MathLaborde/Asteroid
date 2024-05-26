@@ -3,8 +3,10 @@ body {
   display: flex;
   height: 90vh;
   flex-wrap: wrap;
+  flex-direction: column;
   align-content: center;
   justify-content: center;
+  color: white;
 }
 
 #main-screen,

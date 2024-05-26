@@ -1,24 +1,20 @@
 function detectarColisao(foguete, asteroides, ctx, frameId) {
-  const fogueteX = foguete.position.x;
-  const fogueteY = foguete.position.y;
-  const fogueteWidth = foguete.size.width;
-  const fogueteHeight = foguete.size.height;
+  const fogueteX = Math.floor(foguete.position.x);
+  const fogueteY = Math.floor(foguete.position.y);
 
   for (const asteroide of asteroides) {
-    const asteroideX = asteroide.x;
-    const asteroideY = asteroide.y;
-    const asteroideRaio = asteroide.raio;
+    const asteroideX = Math.floor(asteroide.x + asteroide.raio / 2);
+    const asteroideY = Math.floor(asteroide.y + asteroide.raio / 2);
 
-    // Calcula a distância entre o centro do asteroide e o centro do foguete
-    const distanciaX = fogueteX - asteroideX;
-    const distanciaY = fogueteY - asteroideY;
-    const distancia = Math.sqrt(
-      distanciaX * distanciaX + distanciaY * distanciaY
-    );
+    const dx = Math.abs(Math.floor(fogueteX - asteroideX));
+    const dy = Math.abs(Math.floor(fogueteY - asteroideY));
 
-    // Verifica se houve colisão
-    if (distancia < fogueteWidth / 2 + asteroideRaio) {
-      // Colisão detectada
+    const dxx = dx * dx;
+    const dyy = dy * dy;
+
+    const math = Math.sqrt(Math.abs(dxx + dyy));
+
+    if (math < (asteroide.raio + foguete.size.width) / 2.5) {
       gameOver(ctx, frameId);
       return;
     }
