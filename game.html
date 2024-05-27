@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fugindo de Asteroides</title>
+
+    <link rel="stylesheet" href="src/css/style.css" />
+  </head>
+  <body>
+    <section class="corpo">
+      <div class="titulo">
+        <h1>Fugindo de Asteroides</h1>
+      </div>
+      <div class="main">
+        <div class="objetivo">
+          <h3>Objetivo:</h3>
+          <p>Fugir dos asteroides e sobreviver o máximo de tempo possível.</p>
+        </div>
+
+        <div><canvas id="minha-tela" width="800" height="400"> </canvas></div>
+
+        <div class="regras">
+          <h3>Regras:</h3>
+          <ul>
+            <li>Evite colidir com asteroides</li>
+            <li>Se ficar parado por muito tempo haverá penalidade</li>
+            <li>A pontução equivale ao tempo de sobrevivência</li>
+            <li>A mudança de fase ocorrerá a cada 10 segundos</li>
+            <li>A cada fase aumentará o número de asteroides</li>
+          </ul>
+        </div>
+      </div>
+      <div class="teclas">
+        <div class="conjunto">
+          <div>
+            <div class="tecla">w</div>
+          </div>
+          <div>
+            <div class="tecla">a</div>
+            <div class="tecla">s</div>
+            <div class="tecla">d</div>
+          </div>
+        </div>
+        <h1>Ou</h1>
+        <div class="conjunto">
+          <div>
+            <div class="tecla">↑</div>
+          </div>
+          <div>
+            <div class="tecla">←</div>
+            <div class="tecla">↓</div>
+            <div class="tecla">→</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script type="module" src="src/js/Game.js"></script>
+    <script src="src/js/gamePontuacao.js"></script>
+    <script src="src/js/movimentoAsteroides.js"></script>
+    <script src="src/js/detectarColisao.js"></script>
+  </body>
+</html>

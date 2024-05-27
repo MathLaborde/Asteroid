@@ -44,23 +44,31 @@ function criaAsteroide(escala) {
   asteroids.push({ x: x, y: y, raio: raio, image: image });
 }
 
-// Ver com o Matheus e Vitor
-setTimeout(function () {
-  criaAsteroide("pequeno");
-}, 2000);
+function asteroideInicial() {
+  let qtnInicial = 7;
 
-setInterval(function () {
-  criaAsteroide("pequeno");
-}, 5000);
+  const intervaloInicial = setInterval((e) => {
+    if (qtnInicial > 0) {
+      criaAsteroide(Math.random() > 0.3 ? "pequeno" : "grande");
+      qtnInicial--;
+    } else {
+      clearInterval(intervaloInicial);
+    }
+  }, 500);
 
-setInterval(function () {
-  criaAsteroide("grande");
-}, 10000);
-// Fim
-
-setInterval(function () {
-  level++;
-}, 30000);
+  setInterval(function () {
+    level++;
+    let qtn = 3;
+    const intervalo = setInterval((e) => {
+      if (qtn > 0) {
+        criaAsteroide(Math.random() > 0.3 ? "pequeno" : "grande");
+        qtn--;
+      } else {
+        clearInterval(intervalo);
+      }
+    }, 500);
+  }, 10000);
+}
 
 function moveAsteroides({ ctx }) {
   for (let i = 0; i < asteroids.length; i++) {
@@ -88,16 +96,6 @@ function moveAsteroides({ ctx }) {
       asteroide.raio
     );
 
-    // Debugger cria o Hitbox dos asteroides
-    // ctx.strokeStyle = "red";
-    // ctx.beginPath();
-    // ctx.arc(
-    //   asteroide.x + asteroide.raio / 2,
-    //   asteroide.y + asteroide.raio / 2,
-    //   asteroide.raio / 2,
-    //   0,
-    //   Math.PI * 2
-    // );
     ctx.stroke();
   }
 

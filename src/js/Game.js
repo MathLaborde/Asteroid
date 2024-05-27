@@ -2,19 +2,10 @@ import { RocketMoves } from "./RocketMoves.js";
 
 const canvas = document.getElementById("minha-tela");
 const ctx = canvas.getContext("2d");
+
 let frameId = {
   id: 1,
 };
-
-// Debugger Cordenadas ao passar o mouse
-// const coordsDisplay = document.getElementById("coords");
-
-// canvas.addEventListener("mousemove", (event) => {
-//   const rect = canvas.getBoundingClientRect();
-//   const x = Math.floor(event.clientX - rect.left);
-//   const y = Math.floor(event.clientY - rect.top);
-//   coordsDisplay.textContent = `Coordenadas: (X: ${x}, Y: ${y})`;
-// });
 
 const Pontos = {
   intervalo: function () {
@@ -41,7 +32,6 @@ const Pontos = {
 };
 
 Pontos.intervalo();
-criaAsteroide("pequeno");
 ctx.font = "20px cursive";
 
 RocketMoves.start({ ctx });
@@ -50,12 +40,9 @@ if (frameId.id) {
   frameId.id = requestAnimationFrame(GameLoop);
 }
 
-function GameLoop() {
-  // Debugger Cordenadas do foguete
-  // document.getElementById("cordenadas").innerHTML = `(${Math.floor(
-  //   RocketMoves.position.x
-  // )} , ${Math.floor(RocketMoves.position.y)})`;
+asteroideInicial();
 
+function GameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   RocketMoves.update();

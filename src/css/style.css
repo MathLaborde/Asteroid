@@ -7,12 +7,78 @@ body {
   align-content: center;
   justify-content: center;
   color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#main-screen,
 #minha-tela {
   box-shadow: 0 0 100px 0px rgba(255, 255, 255, 0.2);
   background-image: url("../img/universe.png");
   width: 800px;
   height: 400px;
+}
+
+.corpo {
+}
+
+.titulo {
+  text-align: center;
+}
+
+.main {
+  font-size: 16px;
+  display: flex;
+  gap: 20px;
+}
+
+.objetivo {
+  text-align: right;
+}
+
+.teclas {
+  text-align: center;
+}
+
+.objetivo,
+.regras {
+  width: 200px;
+}
+
+.regras > ul {
+  margin-left: -15px;
+}
+
+.teclas {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+  margin: 10px auto;
+}
+
+.conjunto {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.conjunto > div {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.tecla {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: -7px -7px 5px rgba(0, 0, 0, 0.4) inset;
+}
+
+.fantasma {
+  width: 40px;
+  height: 40px;
 }
