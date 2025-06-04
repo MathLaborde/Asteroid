@@ -26,9 +26,10 @@ O objetivo é evitar os asteroides e sobreviver o maior tempo possível!
 ## 🚀 Funcionalidades
 
 - Controle da nave com teclado
-- Asteroides gerados aleatoriamente
-- Sistema de pontuação e dificuldade com base no tempo
+- Asteroides gerados aleatoriamente (quantidade e direção)
+- Sistema de pontuação e dificuldade baseados no tempo
 - Detecção de colisões
+- Níveis de dificuldade
 - Game over e reinício do jogo
 
 ## 📁 Como executar o projeto
@@ -38,7 +39,9 @@ O objetivo é evitar os asteroides e sobreviver o maior tempo possível!
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
    ```
 
-2. Abra o arquivo `index.html` em qualquer navegador moderno.
+2. Abra a pasta do projeto e clique em `game.html` para rodar em qualquer navegador moderno.
+
+3. Caso perca e deseje jogar novamente, basta dar um reload na página.
 
 ## 🤝 Contribuições
 
